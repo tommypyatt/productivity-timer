@@ -10,7 +10,7 @@
 
         componentDidMount: function () {
             this.timer = setInterval(this.update, 500);
-            this.chime = new Audio('../sounds/chime.mp3');
+            this.chime = new Audio('https://raw.githubusercontent.com/tommypyatt/productivity-timer/gh-pages/sounds/chime.mp3');
         },
 
         start: function (minutes, seconds) {
