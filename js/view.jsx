@@ -10,6 +10,7 @@
 
         componentDidMount: function () {
             this.timer = setInterval(this.update, 500);
+            this.chime = new Audio('../sounds/chime.mp3');
         },
 
         start: function (minutes, seconds) {
@@ -39,7 +40,7 @@
             this.setState({
                 running: false
             });
-            alert('Timer end');
+            this.chime.play();
         },
 
         render: function () {
