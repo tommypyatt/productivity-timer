@@ -13,6 +13,7 @@
         componentDidMount: function () {
             this.timer = setInterval(this.update, 500);
             this.chime = new Audio('https://raw.githubusercontent.com/tommypyatt/productivity-timer/gh-pages/sounds/chime.mp3');
+            this.favicon = document.getElementById('favicon');
         },
 
         start: function (minutes, seconds) {
@@ -20,6 +21,7 @@
                 running: true,
                 endTime: Date.now() + minutes * 60000 + seconds * 1000 + 1000
             });
+            this.favicon.href = 'favicon-normal.ico';
         },
 
         update: function () {
@@ -43,6 +45,7 @@
                 running: false
             });
             this.chime.play();
+            this.favicon.href = 'favicon-alert.ico';
         },
 
         render: function () {
