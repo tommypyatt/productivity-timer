@@ -85,22 +85,25 @@ textarea {
    ========================================================================== */
 
 body {
-    background: black;
     font-family: monospace;
+    background: #ececec;
 }
 
 a,
 a:visited,
 .counter {
-    color: #ffe509;
+    color: #656565;
 }
 
 .counter {
     font-family: 'digital-7_monomono', monospace;
     font-size: 110px;
     text-align: center;
-    background: black;
-    color: #ffe509;
+    background: #000;
+    max-width: 340px;
+    margin: 20px auto 0;
+    border-radius: 8px;
+    color: rgb(255, 255, 255);
 }
 
 .counter > p {
@@ -108,10 +111,19 @@ a:visited,
 }
 
 .operation {
-    border: 1px solid white;
     padding: 20px;
     margin: 0 auto;
     max-width: 340px;
+    text-align: center;
+}
+
+.operation a {
+    display: inline-block;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px #909090;
+    background: #fff;
+    width: 100%;
 }
 
 
