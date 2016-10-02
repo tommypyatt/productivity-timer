@@ -84,12 +84,34 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+body {
+    background: black;
+    font-family: monospace;
+}
+
+a,
+a:visited,
+.counter {
+    color: #ffe509;
+}
+
 .counter {
     font-family: 'digital-7_monomono', monospace;
-    font-size: 48px;
+    font-size: 110px;
     text-align: center;
     background: black;
     color: #ffe509;
+}
+
+.counter > p {
+    margin: 0;
+}
+
+.operation {
+    border: 1px solid white;
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 340px;
 }
 
 
