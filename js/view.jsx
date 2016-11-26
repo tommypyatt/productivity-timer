@@ -94,6 +94,21 @@
             });
         },
 
+        incrementCustomTimer: function () {
+            this.setState({
+                customTimer: this.state.customTimer + 1
+            });
+        },
+
+        decrementCustomTimer: function () {
+            decrement = this.state.customTimer - 1;
+            if (decrement < 0) decrement = 0;
+
+            this.setState({
+                customTimer: decrement
+            });
+        },
+
         render: function () {
             return <div>
                 <div className='counter'>
@@ -110,7 +125,9 @@
                         <p>
                             <a href="#" onClick={() => {this.start(this.state.customTimer, 0)}}>Start custom ({this.state.customTimer} minute{(this.state.customTimer == 1) ? '' : 's'})</a>
                         </p>
-                        <input type="number" defaultValue={this.state.customTimer} onChange={this.changeCustom} />
+                        <button className="dec" type="button" onClick={this.decrementCustomTimer}>-</button>
+                        <input hidden type="number" defaultValue={this.state.customTimer} onChange={this.changeCustom} />
+                        <button className="inc" type="button" onClick={this.incrementCustomTimer}>+</button>
                     </div>
                     <p style={{display: (this.state.running) ? 'block' : 'none'}}>
                         <a href="#" onClick={this.pause}>Pause</a>
