@@ -15,7 +15,56 @@
             this.timer = setInterval(this.update, 500);
             this.chime = new Audio('https://raw.githubusercontent.com/tommypyatt/productivity-timer/gh-pages/sounds/chime.mp3');
             this.favicon = document.getElementById('favicon');
+            this.activateWorker();
+            this.activateNotifications();
             document.body.addEventListener('keyup', this.onKeyUp);
+        },
+
+        activateWorker: function () {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('sw.js').then(function (reg) {
+                    // registration worked
+                    console.log('Registration succeeded. Scope is ' + reg.scope);
+                }).catch(function (error) {
+                    // registration failed
+                    console.log('Registration failed with ' + error);
+                });
+            }
+        },
+
+        activateNotifications: function () {
+            if (!('Notification' in window)) {
+                return;
+            }
+
+            Notification.requestPermission(function (status) {
+                console.log('Notification permission status:', status);
+            });
+        },
+
+        pushNotice: function () {
+            if (Notification.permission == 'granted') {
+                navigator.serviceWorker.getRegistration().then(function (reg) {
+                    var options = {
+                        body: 'Finished',
+                        icon: 'img/notification-flat.png',
+                        vibrate: [100, 50, 100],
+                        data: {
+                            dateOfArrival: Date.now(),
+                            //use a "key" (unique) property in the data to determine which notification was called.
+                            primaryKey: 1
+                        },
+                        actions: [{
+                            action: 'explore', title: 'Go to the site',
+                            icon: 'img/checkmark.png'
+                        }, {
+                            action: 'close', title: 'Close the notification',
+                            icon: 'img/xmark.png'
+                        }]
+                    };
+                    reg.showNotification('Timer', options);
+                });
+            }
         },
 
         onKeyUp: function (event) {
@@ -86,6 +135,7 @@
             this.setState({
                 running: false
             });
+            this.pushNotice();
             this.chime.play();
             this.favicon.href = 'favicon-alert.ico';
         },
